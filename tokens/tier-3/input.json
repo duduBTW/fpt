@@ -1,0 +1,18 @@
+{
+  "input": {
+    "color": {
+      "icon": { "$value": "{t2.secondary-icon}" },
+      "background": { "$value": "{t2.surface-accent}" },
+      "content": { "$value": "{t2.content}" },
+      "placeholder": { "$value": "{t2.placeholder}" }
+    },
+    "spacing": {
+      "horizontal": { "$value": "{spacing.2}" },
+      "vertical": { "$value": "{spacing.1}" }
+    },
+    "radius": {
+      "$type": "dimension",
+      "$value": "{radius.default}"
+    }
+  }
+}

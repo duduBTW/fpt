@@ -1,0 +1,54 @@
+{
+  "button": {
+    "variant": {
+      "primary": {
+        "color": {
+          "$type": "color",
+          "background": {
+            "$value": "{t2.surface}"
+          },
+          "background-hover": {
+            "$value": "{t2.hover-light}"
+          },
+          "content": {
+            "$value": "{t2.secondary-icon}"
+          }
+        }
+      },
+      "secondary": {
+        "color": {
+          "$type": "color",
+          "background": {
+            "$value": "{t2.surface}"
+          },
+          "background-hover": {
+            "$value": "{t2.hover-light}"
+          },
+          "content": {
+            "$value": "{t2.secondary-icon}"
+          }
+        }
+      }
+    },
+    "size": {
+      "small": {
+        "spacing": {
+          "$type": "dimension",
+          "vertical": { "$value": "{spacing.1}" },
+          "horizontal": { "$value": "{spacing.2}" }
+        }
+      },
+      "default": {
+        "spacing": {
+          "$type": "dimension",
+          "vertical": { "$value": "{spacing.2}" },
+          "horizontal": { "$value": "{spacing.2}" }
+        }
+      }
+    },
+    "radius": {
+      "$type": "dimension",
+      "$value": "{radius.default}"
+    }
+  }
+}

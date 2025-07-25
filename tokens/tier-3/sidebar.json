@@ -1,0 +1,16 @@
+{
+  "sidebar": {
+    "color": {
+      "$type": "color",
+      "background": {
+        "$value": "{t2.surface-accent}"
+      }
+    },
+    "spacing": {
+      "$type": "dimension",
+      "vertical": { "$value": "{t2.content-vertical}" },
+      "horizontal": { "$value": "{t2.content-horizontal}" },
+      "gap": { "$value": "{t2.button-list-gap}" }
+    }
+  }
+}

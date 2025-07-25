@@ -1,0 +1,9 @@
+{
+  "icon": {
+    "size": {
+      "$type": "dimension",
+      "small": { "$value": "{t2.content-small-height}" },
+      "base": { "$value": "{t2.content-base-height}" }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "t2": {
+    "$type": "dimension",
+    "container-width-md": { "$value": "720px" },
+    "content-horizontal": { "$value": "{spacing.3}" },
+    "content-vertical": { "$value": "{spacing.4}" },
+    "button-list-gap": { "$value": "{spacing.3}" },
+    "content-small-height": { "$value": "{spacing.3}" },
+    "content-base-height": { "$value": "{spacing.4}" }
+  }
+}

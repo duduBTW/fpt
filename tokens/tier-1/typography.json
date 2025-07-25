@@ -1,0 +1,23 @@
+{
+  "typography": {
+    "family": {
+      "title": { "$value": "'Nunito', sans-serif" },
+      "content": { "$value": "'IBM Plex Sans', sans-serif" }
+    },
+    "weight": {
+      "regular": { "$value": 400 },
+      "medium": { "$value": 500 },
+      "bold": { "$value": 700 }
+    },
+    "size": {
+      "sm": { "$value": "12px" },
+      "base": { "$value": "14px" },
+      "lg": { "$value": "20px" }
+    },
+    "lineHeight": {
+      "sm": { "$value": "14px" },
+      "base": { "$value": "16px" },
+      "lg": { "$value": "24px" }
+    }
+  }
+}
