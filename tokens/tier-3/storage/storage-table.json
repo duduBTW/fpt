@@ -1,0 +1,10 @@
+{
+  "storage-table": {
+    "last-changed": {
+      "width": { "$value": "{t2.table-small-column}" }
+    },
+    "size": {
+      "width": { "$value": "{t2.table-small-column}" }
+    }
+  }
+}

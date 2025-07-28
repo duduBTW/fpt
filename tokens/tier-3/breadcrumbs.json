@@ -1,0 +1,15 @@
+{
+  "breadcrumbs": {
+    "color": {
+      "icon": { "$value": "{t2.secondary-icon}" },
+      "content": { "$value": "{t2.content}" },
+      "content-active": { "$value": "{t2.content-active}" }
+    },
+    "spacing": {
+      "container-horizontal": { "$value": "{t2.list-horizontal-compact}" },
+      "container-vertical": { "$value": "{t2.list-vertical-compact}" },
+      "container-gap": { "$value": "{spacing.2}" },
+      "item-gap": { "$value": "{t2.list-gap-compact}" }
+    }
+  }
+}

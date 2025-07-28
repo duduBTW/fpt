@@ -2,10 +2,14 @@
   "t2": {
     "$type": "dimension",
     "container-width-md": { "$value": "720px" },
+    "list-horizontal-compact": { "$value": "{spacing.2}" },
+    "list-vertical-compact": { "$value": "{spacing.2}" },
+    "list-gap-compact": { "$value": "{spacing.2}" },
     "content-horizontal": { "$value": "{spacing.3}" },
     "content-vertical": { "$value": "{spacing.4}" },
     "button-list-gap": { "$value": "{spacing.3}" },
     "content-small-height": { "$value": "{spacing.3}" },
-    "content-base-height": { "$value": "{spacing.4}" }
+    "content-base-height": { "$value": "{spacing.4}" },
+    "table-small-column": { "$value": "120px" }
   }
 }

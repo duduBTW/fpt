@@ -1,0 +1,28 @@
+{
+  "contextMenu": {
+    "color": {
+      "background": { "$value": "{t2.surface-accent}" },
+      "content": { "$value": "{t2.content}" },
+      "icon": { "$value": "{t2.content}" },
+      "hover": { "$value": "{t2.active-light}" }
+    },
+    "spacing": {
+      "horizontal": { "$value": "{spacing.1}" },
+      "vertical": { "$value": "{spacing.1}" },
+      "gap": { "$value": "{spacing.0.5}" },
+      "item-horizontal": { "$value": "{spacing.3}" },
+      "item-vertical": { "$value": "{spacing.1}" },
+      "item-gap": { "$value": "{spacing.2}" }
+    },
+    "radius": {
+      "container": {
+        "$type": "dimension",
+        "$value": "{radius.default}"
+      },
+      "item": {
+        "$type": "dimension",
+        "$value": "{radius.small}"
+      }
+    }
+  }
+}

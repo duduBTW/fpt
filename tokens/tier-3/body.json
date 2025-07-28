@@ -1,0 +1,7 @@
+{
+  "body": {
+    "corner-radius": {
+      "$value": "{radius.large}"
+    }
+  }
+}

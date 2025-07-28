@@ -5,13 +5,13 @@
         "color": {
           "$type": "color",
           "background": {
-            "$value": "{t2.surface}"
+            "$value": "{t2.surface-inverted}"
           },
           "background-hover": {
-            "$value": "{t2.hover-light}"
+            "$value": "{t2.content-inverted}"
           },
           "content": {
-            "$value": "{t2.secondary-icon}"
+            "$value": "{t2.content-inverted}"
           }
         }
       },
@@ -23,6 +23,9 @@
           },
           "background-hover": {
             "$value": "{t2.hover-light}"
+          },
+          "background-active": {
+            "$value": "{t2.active-light}"
           },
           "content": {
             "$value": "{t2.secondary-icon}"

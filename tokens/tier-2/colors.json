@@ -1,20 +1,18 @@
 {
   "t2": {
     "$type": "color",
-    "body": {
-      "$value": "{colors.orange.50}"
-    },
-    "surface": {
-      "$value": "{colors.red.50}"
-    },
-    "surface-accent": {
-      "$value": "{colors.light}"
-    },
-    "secondary-icon": {
-      "$value": "{colors.red.400}"
-    },
+    "body": { "$value": "{colors.orange.50}" },
+    "surface": { "$value": "{colors.red.50}" },
+    "surface-inverted": { "$value": "{colors.red.500}" },
+    "surface-accent": { "$value": "{colors.light}" },
+    "secondary-icon": { "$value": "{colors.red.400}" },
     "hover-light": { "$value": "{colors.yellow.100}" },
+    "active-light": { "$value": "{colors.yellow.200}" },
     "content": { "$value": "{colors.gray.950}" },
-    "placeholder": { "$value": "{colors.gray.500}" }
+    "content-inverted": { "$value": "{colors.light}" },
+    "content-active": { "$value": "{colors.gray.500}" },
+    "placeholder": { "$value": "{colors.gray.500}" },
+    "focus-ring": { "$value": "{colors.red.500}" },
+    "divider": { "$value": "{colors.red.100}" }
   }
 }

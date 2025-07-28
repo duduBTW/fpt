@@ -1,6 +1,7 @@
 {
   "spacing": {
     "$type": "dimension",
+    "0.5": { "$value": "2px" },
     "1": { "$value": "4px" },
     "2": { "$value": "8px" },
     "3": { "$value": "14px" },

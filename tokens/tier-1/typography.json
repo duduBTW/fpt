@@ -12,7 +12,7 @@
     "size": {
       "sm": { "$value": "12px" },
       "base": { "$value": "14px" },
-      "lg": { "$value": "20px" }
+      "lg": { "$value": "16px" }
     },
     "lineHeight": {
       "sm": { "$value": "14px" },

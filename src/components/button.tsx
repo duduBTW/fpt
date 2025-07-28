@@ -65,6 +65,9 @@ const styles = {
       &:hover {
         background: var(--button-variant-secondary-color-background-hover);
       }
+      &:active {
+        background: var(--button-variant-secondary-color-background-active);
+      }
     }
   `,
   text: styled.span``,

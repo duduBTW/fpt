@@ -4,11 +4,13 @@
       "icon": { "$value": "{t2.secondary-icon}" },
       "background": { "$value": "{t2.surface-accent}" },
       "content": { "$value": "{t2.content}" },
-      "placeholder": { "$value": "{t2.placeholder}" }
+      "placeholder": { "$value": "{t2.placeholder}" },
+      "border-focus": { "$value": "{t2.focus-ring}" }
     },
     "spacing": {
       "horizontal": { "$value": "{spacing.2}" },
-      "vertical": { "$value": "{spacing.1}" }
+      "vertical": { "$value": "{spacing.1}" },
+      "gap": { "$value": "{spacing.2}" }
     },
     "radius": {
       "$type": "dimension",

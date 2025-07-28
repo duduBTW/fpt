@@ -3,9 +3,19 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  user-select: none;
+
+  font-size: var(--typography-size-base);
+  font-family: var(--typography-family-content);
+  line-height: var(--typography-line-height-base);
 }
 
 body,
 #root {
   min-height: 100%;
+}
+
+:focus-visible {
+  outline: 1px solid var(--t2-focus-ring);
+  outline-offset: 2px;
 }

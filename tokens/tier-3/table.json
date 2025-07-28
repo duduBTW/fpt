@@ -1,0 +1,24 @@
+{
+  "table": {
+    "color": {
+      "background": { "$value": "{t2.surface}" },
+      "backgroundAccent": { "$value": "{t2.surface-accent}" },
+      "content": { "$value": "{t2.content}" },
+      "icon": { "$value": "{t2.content}" },
+      "sorting-icon": { "$value": "{t2.secondary-icon}" },
+      "border": { "$value": "{t2.divider}" },
+      "hover": { "$value": "{t2.hover-light}" },
+      "active": { "$value": "{t2.active-light}" }
+    },
+    "spacing": {
+      "row": {
+        "horizontal": { "$value": "{t2.list-horizontal-compact}" },
+        "vertical": { "$value": "{t2.list-vertical-compact}" }
+      }
+    },
+    "radius": {
+      "$type": "dimension",
+      "$value": "{radius.default}"
+    }
+  }
+}
