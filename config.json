@@ -10,6 +10,26 @@
           "format": "css/variables"
         }
       ]
+    },
+    "js": {
+      "transformGroup": "js",
+      "buildPath": "src",
+      "files": [
+        {
+          "destination": "index.js",
+          "format": "javascript/es6"
+        }
+      ]
+    },
+    "ts": {
+      "transformGroup": "js",
+      "buildPath": "dist/",
+      "files": [
+        {
+          "destination": "index.d.ts",
+          "format": "typings/es6"
+        }
+      ]
     }
   }
 }

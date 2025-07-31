@@ -5,6 +5,7 @@
       "backgroundAccent": { "$value": "{t2.surface-accent}" },
       "content": { "$value": "{t2.content}" },
       "icon": { "$value": "{t2.content}" },
+      "icon-header": { "$value": "{t2.secondary-icon}" },
       "sorting-icon": { "$value": "{t2.secondary-icon}" },
       "border": { "$value": "{t2.divider}" },
       "hover": { "$value": "{t2.hover-light}" },

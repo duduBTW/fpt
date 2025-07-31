@@ -2,6 +2,7 @@ import styled, { css } from "styled-components";
 import { Icon as DsIcon } from "./icon";
 import type { DynamicIcon } from "lucide-react/dynamic";
 import { typography } from "../typography";
+import { Avatar } from "./avatar";
 
 export function Table(props: React.ComponentProps<"table">) {
   return <styles.table {...props} />;
@@ -23,6 +24,11 @@ function HeaderColumn(props: React.ComponentProps<"th">) {
 function HeaderColumnText(props: React.ComponentProps<"span">) {
   return <styles.headerColumnText {...props} />;
 }
+function HeaderColumnIcon(
+  props: Omit<React.ComponentProps<typeof DynamicIcon>, "color" | "size">
+) {
+  return <styles.headerColumnIcon size="small" {...props} />;
+}
 
 // ---
 // Body
@@ -41,9 +47,18 @@ function ItemColumnIcon(
   props: Omit<React.ComponentProps<typeof DynamicIcon>, "color" | "size">
 ) {
   return (
-    <styles.itemColumnIcon>
+    <styles.itemColumnDecoration>
       <DsIcon size="base" {...props} />
-    </styles.itemColumnIcon>
+    </styles.itemColumnDecoration>
+  );
+}
+function ItemColumnAvatar(
+  props: Omit<React.ComponentProps<typeof Avatar>, "size">
+) {
+  return (
+    <styles.itemColumnDecoration>
+      <Avatar size="extra-small" {...props} />
+    </styles.itemColumnDecoration>
   );
 }
 function ItemColumnText(props: React.ComponentProps<"th">) {
@@ -59,6 +74,8 @@ function ItemColumnInput(props: React.ComponentProps<"input">) {
 Table.Header = Header;
 Table.HeaderColumn = HeaderColumn;
 Table.HeaderColumnText = HeaderColumnText;
+Table.HeaderColumnIcon = HeaderColumnIcon;
+Table.ItemColumnAvatar = ItemColumnAvatar;
 Table.Body = Body;
 Table.Item = Item;
 Table.ItemColumn = ItemColumn;
@@ -86,6 +103,7 @@ const styles = {
   `,
   headerColumn: styled.th`
     text-align: start;
+    position: relative;
 
     ${columnStyles}
     ${typography["title-sm"]}
@@ -97,6 +115,11 @@ const styles = {
   `,
   headerColumnText: styled.span`
     flex: 1;
+  `,
+  headerColumnIcon: styled(DsIcon)`
+    position: absolute;
+    right: var(--table-spacing-row-horizontal);
+    color: var(--table-color-icon-header);
   `,
   body: styled.tbody`
     & > tr:nth-of-type(even) {
@@ -148,7 +171,7 @@ const styles = {
 
     ${typography.base}
   `,
-  itemColumnIcon: styled.span`
+  itemColumnDecoration: styled.span`
     padding-right: 8px;
   `,
   empty: styled.td`

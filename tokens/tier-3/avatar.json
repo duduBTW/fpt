@@ -1,0 +1,11 @@
+{
+  "avatar": {
+    "size": {
+      "$type": "dimension",
+      "extra-small": { "$value": "{t2.content-base-height}" }
+    },
+    "radius": {
+      "$value": "{radius.full}"
+    }
+  }
+}

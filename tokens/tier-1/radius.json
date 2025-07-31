@@ -3,6 +3,7 @@
     "$type": "dimension",
     "default": { "$value": "8px" },
     "small": { "$value": "4px" },
-    "large": { "$value": "12px" }
+    "large": { "$value": "12px" },
+    "full": { "$value": "999px" }
   }
 }

@@ -1,0 +1,13 @@
+{
+  "storage-breadcrumbs": {
+    "spacing": {
+      "max-width": { "$value": "{t2.container-width-md}" },
+      "horizontal": { "$value": "{t2.content-horizontal}" },
+      "vertical": { "$value": "0px" }
+    },
+    "colors": {
+      "transparent":{ "$value": "{t2.body}" },
+      "accent":  { "$value": "{t2.surface-accent}" }
+    }
+  }
+}

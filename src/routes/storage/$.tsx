@@ -5,19 +5,13 @@ import { Input } from "../../components/input";
 import { Table } from "../../components/table";
 import { Layout } from "../../components/layout";
 import { Breadcrumbs } from "../../components/breadcrumbs";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { formatSize, useFormatDate } from "../../hooks/format";
-import {
-  createFileRoute,
-  useCanGoBack,
-  useNavigate,
-  useRouter,
-} from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { ContextMenu } from "../../components/context-menu";
 import { useAtom } from "jotai";
 import { Icon } from "../../components/icon";
-import { typography } from "../../typography";
 import { HOME_LABEL, useStorageLocation } from "../../hooks/storage";
 import {
   deleteFile,
@@ -28,11 +22,27 @@ import {
   useNewFolder,
   type File,
 } from "../../service/storage";
-import { editingIdAtom, selectedFileAtom } from "../../state/storage";
+import {
+  DEFAULT_SORTING_ORDER,
+  editingIdAtom,
+  selectedFileAtom,
+  sortByAtom,
+  sortHasInteractedAtom,
+  type SortKey,
+} from "../../state/storage";
+import { useBreakpoint, useViewPort } from "../../hooks/viewport";
+import { useIsRootWebDesign } from "../../hooks/root";
+import { Title } from "../../components/title";
 
 export const Route = createFileRoute("/storage/$")({
   component: RouteComponent,
 });
+
+function useShowInput() {
+  const viewPort = useViewPort();
+  const breakpoint = useBreakpoint();
+  return viewPort === "web" && breakpoint.is(["lg"]);
+}
 
 function RouteComponent() {
   const newFolder = useNewFolder();
@@ -53,20 +63,58 @@ function RouteComponent() {
 
 function Body() {
   const { path } = useStorageLocation();
+  const showInput = useShowInput();
+  const [sortBy, setSortBy] = useAtom(sortByAtom);
+  const [sortHasInteracted, setSortHasInteracted] = useAtom(
+    sortHasInteractedAtom
+  );
+
+  const getNewOrder = (field: SortKey) => {
+    const [selectedField, order] = sortBy;
+    if (selectedField === field) {
+      return order === "asc" ? "desc" : "asc";
+    }
+
+    return DEFAULT_SORTING_ORDER;
+  };
+
+  const handleHeaderClick = (field: SortKey) => () => {
+    setSortHasInteracted(true);
+    setSortBy([field, getNewOrder(field)]);
+  };
+
+  const getChevron = (field: SortKey) => {
+    const [selectedField, order] = sortBy;
+    if (!sortHasInteracted || selectedField !== field) {
+      return null;
+    }
+
+    return (
+      <Table.HeaderColumnIcon
+        name={order === "asc" ? "chevron-down" : "chevron-up"}
+      />
+    );
+  };
 
   return (
     <Layout>
       <Layout.LeftPart />
       <Layout.Body>
-        <Title />
+        <StorageTitle />
         <Table>
           <Table.Header>
-            <Table.HeaderColumn>
+            <Table.HeaderColumn onClick={handleHeaderClick("Name")}>
               <Table.HeaderColumnText>Name</Table.HeaderColumnText>
-              <Icon name="chevron-down" size="small" />
+              {getChevron("Name")}
             </Table.HeaderColumn>
-            <styles.tableLastChanged>Last changed</styles.tableLastChanged>
-            <styles.tableLastSize>Size</styles.tableLastSize>
+            <styles.tableLastChanged onClick={handleHeaderClick("CreatedAt")}>
+              <Table.HeaderColumnText>Last changed</Table.HeaderColumnText>
+              {getChevron("CreatedAt")}
+            </styles.tableLastChanged>
+            <styles.tableLastSize onClick={handleHeaderClick("Size")}>
+              <Table.HeaderColumnText>Size</Table.HeaderColumnText>
+              {getChevron("Size")}
+            </styles.tableLastSize>
           </Table.Header>
           <Table.Body>
             <TableBodyContent key={path} />
@@ -74,10 +122,14 @@ function Body() {
         </Table>
       </Layout.Body>
       <Layout.RightPart>
-        <Input>
-          <Input.Icon name="search" />
-          <Input.Content placeholder="Search..." />
-        </Input>
+        {showInput ? (
+          <styles.searchInputContainer>
+            <styles.searchInput>
+              <Input.Icon name="search" />
+              <Input.Content placeholder="Search..." />
+            </styles.searchInput>
+          </styles.searchInputContainer>
+        ) : null}
       </Layout.RightPart>
     </Layout>
   );
@@ -99,6 +151,42 @@ function TableBodyContent() {
   const [editingId] = useAtom(editingIdAtom);
   const [selectedFile, setSelectedFile] = useAtom(selectedFileAtom);
   const formatDate = useFormatDate();
+  const [sortBy] = useAtom(sortByAtom);
+
+  const sortedFiles = useMemo(() => {
+    const [selectedField, order] = sortBy;
+    if (typeof files === "undefined" || files === null) {
+      return [];
+    }
+
+    const sortFile = (a: File, b: File) => {
+      switch (selectedField) {
+        case "CreatedAt":
+          return (
+            new Date(a.CreatedAt).getTime() - new Date(b.CreatedAt).getTime()
+          );
+        case "Name":
+          return a.Name.localeCompare(b.Name, undefined, {
+            sensitivity: "base",
+          });
+        case "Size":
+          return a.Size - b.Size;
+        default:
+          throw new Error("");
+      }
+    };
+
+    return files.sort((a, b) => {
+      switch (order) {
+        case "asc":
+          return sortFile(a, b);
+        case "desc":
+          return sortFile(b, a);
+        default:
+          throw new Error("");
+      }
+    });
+  }, [sortBy, files]);
 
   if (isLoading) {
     return null;
@@ -155,7 +243,7 @@ function TableBodyContent() {
 
   return (
     <>
-      {files.map((file) => {
+      {sortedFiles.map((file) => {
         const { Name, Size, CreatedAt, Id, IsFolder } = file;
 
         return (
@@ -252,6 +340,12 @@ function NameItemColumnInput(props: { Name: string; file: File }) {
   }, []);
 
   const rename = async (value: string, file: File) => {
+    if (file.Name === value) {
+      // nothign changed
+      setEditingId(undefined);
+      return;
+    }
+
     await renameFile(String(file.Id), file.Path, file.Name, value);
     await queryClient.refetchQueries({ queryKey: ["files", path] });
     setEditingId(undefined);
@@ -274,9 +368,8 @@ function NameItemColumnInput(props: { Name: string; file: File }) {
   );
 }
 
-function Title() {
-  const router = useRouter();
-  const canGoBack = useCanGoBack();
+function StorageTitle() {
+  const showInput = useShowInput();
   const { label, path } = useStorageLocation();
   const queryClient = useQueryClient();
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -298,23 +391,9 @@ function Title() {
   const newFolderClickHandler = useNewFolder();
 
   return (
-    <styles.title>
-      <Button
-        disabled={!canGoBack}
-        onClick={() => router.history.back()}
-        variant="secondary"
-        size="small"
-      >
-        <Button.Icon name="chevron-left" />
-      </Button>
-      <Button
-        onClick={() => router.history.forward()}
-        variant="secondary"
-        size="small"
-      >
-        <Button.Icon name="chevron-right" />
-      </Button>
-      <styles.titleText>{label}</styles.titleText>
+    <Title>
+      <Title.Navigation />
+      <Title.Text>{label}</Title.Text>
       <input
         onChange={fileChangeHandler}
         ref={fileInputRef}
@@ -327,41 +406,49 @@ function Title() {
       <Button onClick={newFolderClickHandler} variant="secondary" size="small">
         <Button.Icon name="folder-plus" />
       </Button>
-    </styles.title>
+      {!showInput ? (
+        <Button variant="secondary" size="small">
+          <Button.Icon name="search" />
+        </Button>
+      ) : null}
+    </Title>
   );
 }
 
 function Footer() {
   const { divided } = useStorageLocation();
   const navigate = useNavigate();
+  const isRootWebDesign = useIsRootWebDesign();
 
   let accPath = "/";
   return (
-    <styles.footer>
-      <Breadcrumbs>
-        <Breadcrumbs.Item onClick={() => navigate({ to: ".." })}>
-          <Breadcrumbs.ItemIcon name="home" />
-          <Breadcrumbs.ItemText>{HOME_LABEL}</Breadcrumbs.ItemText>
-        </Breadcrumbs.Item>
+    <styles.footer data-color-type={isRootWebDesign ? "accent" : "transparent"}>
+      <styles.footerContent>
+        <Breadcrumbs>
+          <Breadcrumbs.Item onClick={() => navigate({ to: ".." })}>
+            <Breadcrumbs.ItemIcon name="home" />
+            <Breadcrumbs.ItemText>{HOME_LABEL}</Breadcrumbs.ItemText>
+          </Breadcrumbs.Item>
 
-        {divided?.map((location) => {
-          accPath += `/${location}`;
+          {divided?.map((location) => {
+            accPath += `/${location}`;
 
-          return (
-            <React.Fragment key={location}>
-              <Breadcrumbs.Divider />
-              <Breadcrumbs.Item
-                onClick={() => {
-                  navigate({ to: `..${accPath}` });
-                }}
-              >
-                <Breadcrumbs.ItemIcon name="folder" />
-                <Breadcrumbs.ItemText>{location}</Breadcrumbs.ItemText>
-              </Breadcrumbs.Item>
-            </React.Fragment>
-          );
-        })}
-      </Breadcrumbs>
+            return (
+              <React.Fragment key={location}>
+                <Breadcrumbs.Divider />
+                <Breadcrumbs.Item
+                  onClick={() => {
+                    navigate({ to: `..${accPath}` });
+                  }}
+                >
+                  <Breadcrumbs.ItemIcon name="folder" />
+                  <Breadcrumbs.ItemText>{location}</Breadcrumbs.ItemText>
+                </Breadcrumbs.Item>
+              </React.Fragment>
+            );
+          })}
+        </Breadcrumbs>
+      </styles.footerContent>
     </styles.footer>
   );
 }
@@ -371,21 +458,6 @@ const styles = {
     flex: 1;
     display: flex;
     flex-direction: column;
-  `,
-
-  // Title
-  title: styled.div`
-    display: flex;
-
-    gap: var(--spacing-2);
-  `,
-  titleText: styled.h1`
-    flex: 1;
-    padding: 0px;
-    margin: 0px;
-    text-align: center;
-
-    ${typography.title};
   `,
 
   // Table
@@ -405,11 +477,21 @@ const styles = {
   // Footer
   footer: styled.footer`
     display: flex;
-    margin-left: auto;
-    margin-right: auto;
+    justify-content: center;
 
-    width: var(--t2-container-width-md);
-    background-color: var(--colors-light);
+    &[data-color-type="accent"] {
+      background-color: var(--storage-breadcrumbs-colors-accent);
+    }
+    &[data-color-type="transparent"] {
+      background-color: var(--storage-breadcrumbs-colors-transparent);
+    }
+  `,
+  footerContent: styled.div`
+    display: flex;
+    width: 100%;
+
+    max-width: var(--storage-breadcrumbs-spacing-max-width);
+    padding-inline: var(--t2-content-horizontal);
   `,
 
   // Layout Wrappers
@@ -421,5 +503,12 @@ const styles = {
     flex: 1;
     display: flex;
     flex-direction: column;
+  `,
+  searchInputContainer: styled.div`
+    padding-inline: var(--storage-search-input-spacing-horizontal);
+    padding-block: var(--storage-search-input-spacing-vertical);
+  `,
+  searchInput: styled(Input)`
+    max-width: var(--storage-search-input-spacing-max-width);
   `,
 } as const;

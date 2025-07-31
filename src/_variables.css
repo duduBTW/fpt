@@ -79,6 +79,7 @@
   --radius-default: 8px;
   --radius-small: 4px;
   --radius-large: 12px;
+  --radius-full: 999px;
   --spacing-1: 4px;
   --spacing-2: 8px;
   --spacing-3: 14px;
@@ -129,6 +130,8 @@
   --t2-content-small-height: 14px;
   --t2-content-base-height: 16px;
   --t2-table-small-column: 120px;
+  --avatar-size-extra-small: 16px;
+  --avatar-radius: 999px;
   --body-corner-radius: 12px;
   --breadcrumbs-color-icon: oklch(0.704 0.191 22.216);
   --breadcrumbs-color-content: oklch(0.13 0.028 261.692);
@@ -176,12 +179,21 @@
   --sidebar-spacing-vertical: 16px;
   --sidebar-spacing-horizontal: 14px;
   --sidebar-spacing-gap: 14px;
+  --storage-breadcrumbs-spacing-max-width: 720px;
+  --storage-breadcrumbs-spacing-horizontal: 14px;
+  --storage-breadcrumbs-spacing-vertical: 0px;
+  --storage-breadcrumbs-colors-transparent: oklch(0.98 0.016 73.684);
+  --storage-breadcrumbs-colors-accent: #ffffff;
+  --storage-search-input-spacing-max-width: 200px;
+  --storage-search-input-spacing-horizontal: 14px;
+  --storage-search-input-spacing-vertical: 16px;
   --storage-table-last-changed-width: 120px;
   --storage-table-size-width: 120px;
   --table-color-background: oklch(0.971 0.013 17.38);
   --table-color-background-accent: #ffffff;
   --table-color-content: oklch(0.13 0.028 261.692);
   --table-color-icon: oklch(0.13 0.028 261.692);
+  --table-color-icon-header: oklch(0.704 0.191 22.216);
   --table-color-sorting-icon: oklch(0.704 0.191 22.216);
   --table-color-border: oklch(0.936 0.032 17.717);
   --table-color-hover: oklch(0.973 0.071 103.193);

@@ -1,0 +1,9 @@
+{
+  "storage-search-input": {
+    "spacing": {
+      "max-width": { "$value": "200px" },
+      "horizontal": { "$value": "{t2.content-horizontal}" },
+      "vertical": { "$value": "{t2.content-vertical}" }
+    }
+  }
+}

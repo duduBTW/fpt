@@ -41,8 +41,5 @@ const styles = {
   `,
   rightPart: styled.aside`
     flex: 1;
-
-    padding-inline: var(--t2-content-horizontal);
-    padding-block: var(--t2-content-vertical);
   `,
 } as const;

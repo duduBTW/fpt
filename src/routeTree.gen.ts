@@ -9,8 +9,14 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as UsersRouteImport } from './routes/users'
 import { Route as StorageSplatRouteImport } from './routes/storage/$'
 
+const UsersRoute = UsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const StorageSplatRoute = StorageSplatRouteImport.update({
   id: '/storage/$',
   path: '/storage/$',
@@ -18,29 +24,40 @@ const StorageSplatRoute = StorageSplatRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
+  '/users': typeof UsersRoute
   '/storage/$': typeof StorageSplatRoute
 }
 export interface FileRoutesByTo {
+  '/users': typeof UsersRoute
   '/storage/$': typeof StorageSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/users': typeof UsersRoute
   '/storage/$': typeof StorageSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/storage/$'
+  fullPaths: '/users' | '/storage/$'
   fileRoutesByTo: FileRoutesByTo
-  to: '/storage/$'
-  id: '__root__' | '/storage/$'
+  to: '/users' | '/storage/$'
+  id: '__root__' | '/users' | '/storage/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
+  UsersRoute: typeof UsersRoute
   StorageSplatRoute: typeof StorageSplatRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/users': {
+      id: '/users'
+      path: '/users'
+      fullPath: '/users'
+      preLoaderRoute: typeof UsersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/storage/$': {
       id: '/storage/$'
       path: '/storage/$'
@@ -52,6 +69,7 @@ declare module '@tanstack/react-router' {
 }
 
 const rootRouteChildren: RootRouteChildren = {
+  UsersRoute: UsersRoute,
   StorageSplatRoute: StorageSplatRoute,
 }
 export const routeTree = rootRouteImport

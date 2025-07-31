@@ -3,9 +3,16 @@ import styled from "styled-components";
 import { Button } from "./button";
 import { Link } from "@tanstack/react-router";
 
-export function Sidebar() {
+export type SidebarDirection = "row" | "column";
+type SidebarProps = {
+  direction: SidebarDirection;
+};
+
+export function Sidebar(props: SidebarProps) {
+  const { direction } = props;
+
   return (
-    <styles.sidebar>
+    <styles.sidebar data-direction={direction}>
       {sidebarItems.map(({ icon, location }) => (
         <Link to={location}>
           {({ isActive }) => (
@@ -33,6 +40,10 @@ const sidebarItems: SidebarItem[] = [
     location: "/",
   },
   {
+    icon: "user-round",
+    location: "/users",
+  },
+  {
     icon: "folder",
     location: "/storage",
   },
@@ -49,7 +60,13 @@ const sidebarItems: SidebarItem[] = [
 const styles = {
   sidebar: styled.nav`
     display: flex;
-    flex-direction: column;
+
+    &[data-direction="column"] {
+      flex-direction: column;
+    }
+    &[data-direction="row"] {
+      flex-direction: row;
+    }
 
     gap: var(--sidebar-spacing-gap);
     padding-inline: var(--sidebar-spacing-horizontal);
