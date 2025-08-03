@@ -1,0 +1,15 @@
+{
+  "user-code-countdown": {
+    "colors": {
+      "content": { "$value": "{t2.content}" },
+      "background": { "$value": "{t2.surface}" },
+      "border": { "$value": "{t2.divider}" }
+    },
+    "spacing": {
+      "horizontal": { "$value": "{spacing.2}" },
+      "vertical": { "$value": "{spacing.2}" },
+      "gap": { "$value": "{spacing.2}" }
+    },
+    "radius": { "$value": "{radius.default}" }
+  }
+}

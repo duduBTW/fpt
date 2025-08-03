@@ -6,7 +6,7 @@
       "buildPath": "src",
       "files": [
         {
-          "destination": "_variables.css",
+          "destination": "variables/_variables.css",
           "format": "css/variables"
         }
       ]
@@ -16,18 +16,8 @@
       "buildPath": "src",
       "files": [
         {
-          "destination": "index.js",
+          "destination": "variables/_variables.js",
           "format": "javascript/es6"
-        }
-      ]
-    },
-    "ts": {
-      "transformGroup": "js",
-      "buildPath": "dist/",
-      "files": [
-        {
-          "destination": "index.d.ts",
-          "format": "typings/es6"
         }
       ]
     }

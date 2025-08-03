@@ -6,7 +6,7 @@ import { RouterProvider, createRouter } from "@tanstack/react-router";
 import { routeTree } from "./routeTree.gen";
 
 import "sanitize.css";
-import "./_variables.css";
+import "./variables/_variables.css";
 import "./index.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 

@@ -2,7 +2,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useStorageLocation } from "../hooks/storage";
 import { useAtom } from "jotai";
 import { editingIdAtom } from "../state/storage";
-import { pFetch } from "./service";
+import { publicFetch } from "./service";
 
 export type File = {
   Id: number;
@@ -23,7 +23,7 @@ export function useNewFolder() {
     const formData = new FormData();
     formData.append("path", path);
 
-    const res = await pFetch("new-folder", {
+    const res = await publicFetch("new-folder", {
       method: "POST",
       body: formData,
     });
@@ -34,7 +34,7 @@ export function useNewFolder() {
 }
 
 export async function getFiles(path: string) {
-  const res = await pFetch(`list?path=${path}`);
+  const res = await publicFetch(`list?path=${path}`);
   return (await res.json()) as File[];
 }
 
@@ -43,7 +43,7 @@ export async function uploadFile(path: string, file: globalThis.File) {
   formData.append("path", path);
   formData.append("file", file);
 
-  return pFetch("upload", {
+  return publicFetch("upload", {
     method: "POST",
     body: formData,
   });
@@ -54,7 +54,7 @@ export async function deleteFile(path: string, name: string) {
   formData.append("path", path);
   formData.append("name", name);
 
-  await pFetch("delete", {
+  await publicFetch("delete", {
     method: "POST",
     body: formData,
   });
@@ -65,7 +65,7 @@ export async function downloadFile(path: string, name: string) {
   formData.append("path", path);
   formData.append("name", name);
 
-  return pFetch("download", {
+  return publicFetch("download", {
     method: "POST",
     body: formData,
   });
@@ -83,7 +83,7 @@ export async function renameFile(
   formData.append("oldName", oldName);
   formData.append("newName", newName);
 
-  return pFetch("rename", {
+  return publicFetch("rename", {
     method: "POST",
     body: formData,
   });
