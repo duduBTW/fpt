@@ -14,7 +14,7 @@ function Navigation() {
   const canGoBack = useCanGoBack();
 
   return (
-    <>
+    <styles.navigation>
       <Button
         disabled={!canGoBack}
         onClick={() => router.history.back()}
@@ -30,7 +30,7 @@ function Navigation() {
       >
         <Button.Icon name="chevron-right" />
       </Button>
-    </>
+    </styles.navigation>
   );
 }
 
@@ -42,6 +42,11 @@ const styles = {
     display: flex;
 
     gap: var(--spacing-2);
+  `,
+  navigation: styled.div`
+    display: flex;
+
+    gap: var(--spacing-1);
   `,
   titleText: styled.h1`
     flex: 1;

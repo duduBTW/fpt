@@ -1,0 +1,19 @@
+{
+  "form": {
+    "color": {
+      "background": { "$value": "{t2.surface}" },
+      "border": { "$value": "{t2.divider}" },
+      "divider": { "$value": "{t2.divider}" }
+    },
+    "spacing": {
+      "horizontal": { "$value": "{spacing.3}" },
+      "vertical": { "$value": "{spacing.3}" },
+      "gap": { "$value": "{spacing.3}" },
+      "input-gap": { "$value": "{spacing.2}" },
+      "divider-height": { "$value": "1px" }
+    },
+    "radius": {
+      "$value": "{radius.default}"
+    }
+  }
+}

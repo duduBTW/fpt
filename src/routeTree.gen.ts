@@ -9,68 +9,169 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as UsersRouteImport } from './routes/users'
-import { Route as StorageSplatRouteImport } from './routes/storage/$'
+import { Route as RegisterRouteImport } from './routes/register'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as AppRouteRouteImport } from './routes/app/route'
+import { Route as AppUsersRouteImport } from './routes/app/users'
+import { Route as AppUserUserIdRouteImport } from './routes/app/user/$userId'
+import { Route as AppStorageSplatRouteImport } from './routes/app/storage/$'
 
-const UsersRoute = UsersRouteImport.update({
-  id: '/users',
-  path: '/users',
+const RegisterRoute = RegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
   getParentRoute: () => rootRouteImport,
 } as any)
-const StorageSplatRoute = StorageSplatRouteImport.update({
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppRouteRoute = AppRouteRouteImport.update({
+  id: '/app',
+  path: '/app',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppUsersRoute = AppUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+const AppUserUserIdRoute = AppUserUserIdRouteImport.update({
+  id: '/user/$userId',
+  path: '/user/$userId',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+const AppStorageSplatRoute = AppStorageSplatRouteImport.update({
   id: '/storage/$',
   path: '/storage/$',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AppRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/users': typeof UsersRoute
-  '/storage/$': typeof StorageSplatRoute
+  '/app': typeof AppRouteRouteWithChildren
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
+  '/app/users': typeof AppUsersRoute
+  '/app/storage/$': typeof AppStorageSplatRoute
+  '/app/user/$userId': typeof AppUserUserIdRoute
 }
 export interface FileRoutesByTo {
-  '/users': typeof UsersRoute
-  '/storage/$': typeof StorageSplatRoute
+  '/app': typeof AppRouteRouteWithChildren
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
+  '/app/users': typeof AppUsersRoute
+  '/app/storage/$': typeof AppStorageSplatRoute
+  '/app/user/$userId': typeof AppUserUserIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/users': typeof UsersRoute
-  '/storage/$': typeof StorageSplatRoute
+  '/app': typeof AppRouteRouteWithChildren
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
+  '/app/users': typeof AppUsersRoute
+  '/app/storage/$': typeof AppStorageSplatRoute
+  '/app/user/$userId': typeof AppUserUserIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/users' | '/storage/$'
+  fullPaths:
+    | '/app'
+    | '/login'
+    | '/register'
+    | '/app/users'
+    | '/app/storage/$'
+    | '/app/user/$userId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/users' | '/storage/$'
-  id: '__root__' | '/users' | '/storage/$'
+  to:
+    | '/app'
+    | '/login'
+    | '/register'
+    | '/app/users'
+    | '/app/storage/$'
+    | '/app/user/$userId'
+  id:
+    | '__root__'
+    | '/app'
+    | '/login'
+    | '/register'
+    | '/app/users'
+    | '/app/storage/$'
+    | '/app/user/$userId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  UsersRoute: typeof UsersRoute
-  StorageSplatRoute: typeof StorageSplatRoute
+  AppRouteRoute: typeof AppRouteRouteWithChildren
+  LoginRoute: typeof LoginRoute
+  RegisterRoute: typeof RegisterRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/users': {
-      id: '/users'
-      path: '/users'
-      fullPath: '/users'
-      preLoaderRoute: typeof UsersRouteImport
+    '/register': {
+      id: '/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof RegisterRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/storage/$': {
-      id: '/storage/$'
-      path: '/storage/$'
-      fullPath: '/storage/$'
-      preLoaderRoute: typeof StorageSplatRouteImport
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/app': {
+      id: '/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AppRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app/users': {
+      id: '/app/users'
+      path: '/users'
+      fullPath: '/app/users'
+      preLoaderRoute: typeof AppUsersRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
+    '/app/user/$userId': {
+      id: '/app/user/$userId'
+      path: '/user/$userId'
+      fullPath: '/app/user/$userId'
+      preLoaderRoute: typeof AppUserUserIdRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
+    '/app/storage/$': {
+      id: '/app/storage/$'
+      path: '/storage/$'
+      fullPath: '/app/storage/$'
+      preLoaderRoute: typeof AppStorageSplatRouteImport
+      parentRoute: typeof AppRouteRoute
     }
   }
 }
 
+interface AppRouteRouteChildren {
+  AppUsersRoute: typeof AppUsersRoute
+  AppStorageSplatRoute: typeof AppStorageSplatRoute
+  AppUserUserIdRoute: typeof AppUserUserIdRoute
+}
+
+const AppRouteRouteChildren: AppRouteRouteChildren = {
+  AppUsersRoute: AppUsersRoute,
+  AppStorageSplatRoute: AppStorageSplatRoute,
+  AppUserUserIdRoute: AppUserUserIdRoute,
+}
+
+const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(
+  AppRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
-  UsersRoute: UsersRoute,
-  StorageSplatRoute: StorageSplatRoute,
+  AppRouteRoute: AppRouteRouteWithChildren,
+  LoginRoute: LoginRoute,
+  RegisterRoute: RegisterRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -23,7 +23,16 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
 
-    "allowJs": true
+    "allowJs": true,
+
+    /* Alias */
+    "baseUrl": "src",
+    "paths": {
+      "@components/*": ["components/*"],
+      "@service/*": ["service/*"],
+      "@hooks/*": ["hooks/*"],
+      "@state/*": ["state/*"]
+    }
   },
   "include": ["src"]
 }

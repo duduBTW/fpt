@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { DynamicIcon } from "lucide-react/dynamic";
 import { createContext } from "react";
 import { Icon as DsIcon } from "./icon";
+import { typography } from "typography";
 
 export type ButtonVariant = "primary" | "secondary";
 export type ButtonSize = "small" | "default";
@@ -21,7 +22,7 @@ export function Button(props: ButtonProps & React.ComponentProps<"button">) {
 function Icon(
   props: Omit<React.ComponentProps<typeof DynamicIcon>, "color" | "size">
 ) {
-  return <DsIcon size="base" {...props} />;
+  return <DsIcon aria-hidden size="base" {...props} />;
 }
 function Text(props: React.ComponentProps<"span">) {
   return <styles.text {...props} />;
@@ -44,6 +45,7 @@ const styles = {
     border: none;
     transition: background 160ms ease;
 
+    gap: var(--button-spacing-gap);
     border-radius: var(--button-radius);
     &[data-size="small"] {
       padding-inline: var(--button-size-small-spacing-horizontal);
@@ -57,6 +59,13 @@ const styles = {
     &[data-variant="primary"] {
       background: var(--button-variant-primary-color-background);
       color: var(--button-variant-primary-color-content);
+
+      &:hover {
+        background: var(--button-variant-primary-color-background-hover);
+      }
+      &:active {
+        background: var(--button-variant-primary-color-background-active);
+      }
     }
     &[data-variant="secondary"] {
       background: var(--button-variant-secondary-color-background);
@@ -70,7 +79,9 @@ const styles = {
       }
     }
   `,
-  text: styled.span``,
+  text: styled.span`
+    ${typography.base}
+  `,
 } as const;
 
 Button.Text = Text;

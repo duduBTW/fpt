@@ -1,4 +1,4 @@
-import { Route } from "../routes/storage/$";
+import { Route } from "../routes/app/storage/$";
 
 export const HOME_LABEL = "Home";
 export function useStorageLocation() {

@@ -2,7 +2,8 @@
   "avatar": {
     "size": {
       "$type": "dimension",
-      "extra-small": { "$value": "{t2.content-base-height}" }
+      "extra-small": { "$value": "{t2.content-base-height}" },
+      "large": { "$value": "60px" }
     },
     "radius": {
       "$value": "{radius.full}"

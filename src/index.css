@@ -19,3 +19,7 @@ body,
   outline: 1px solid var(--t2-focus-ring);
   outline-offset: 2px;
 }
+
+img {
+  pointer-events: none;
+}

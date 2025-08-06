@@ -1,9 +1,22 @@
 {
   "icon": {
-    "size": {
-      "$type": "dimension",
-      "small": { "$value": "{t2.content-small-height}" },
-      "base": { "$value": "{t2.content-base-height}" }
+    "spacing": {
+      "size": {
+        "small": { "$value": "{t2.content-small-height}" },
+        "base": { "$value": "{t2.content-base-height}" }
+      },
+      "interaction": {
+        "padding": { "$value": "{spacing.1}" }
+      }
+    },
+    "color": {
+      "interaction": {
+        "hover": { "$value": "{t2.hover-light}" },
+        "active": { "$value": "{t2.active-light}" }
+      }
+    },
+    "radius": {
+      "interaction": { "$value": "{radius.full}" }
     }
   }
 }

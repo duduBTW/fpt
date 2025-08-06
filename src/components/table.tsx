@@ -38,7 +38,13 @@ function Body(props: React.ComponentProps<"tbody">) {
 }
 function Item(props: React.ComponentProps<"tr"> & { selected?: boolean }) {
   const { selected, ...rest } = props;
-  return <styles.item data-selected={selected} {...rest} />;
+  return (
+    <styles.item
+      data-interactable={typeof rest.onClick !== "undefined"}
+      data-selected={selected}
+      {...rest}
+    />
+  );
 }
 function ItemColumn(props: React.ComponentProps<"th">) {
   return <styles.itemColumn {...props} />;
@@ -125,26 +131,30 @@ const styles = {
     & > tr:nth-of-type(even) {
       background: var(--table-color-background-accent);
 
-      &:hover,
-      &:focus-visible,
-      &[data-state="open"] {
-        outline: none;
-        background: var(--table-color-hover);
-      }
+      &[data-interactable="true"] {
+        &:hover,
+        &:focus-visible,
+        &[data-state="open"] {
+          outline: none;
+          background: var(--table-color-hover);
+        }
 
-      &[data-selected="true"] {
-        background: var(--table-color-active);
+        &[data-selected="true"] {
+          background: var(--table-color-active);
+        }
       }
     }
   `,
   item: styled.tr`
     background: var(--table-color-background);
 
-    &:hover,
-    &:focus-visible,
-    &[data-state="open"] {
-      outline: none;
-      background: var(--table-color-hover);
+    &[data-interactable="true"] {
+      &:hover,
+      &:focus-visible,
+      &[data-state="open"] {
+        outline: none;
+        background: var(--table-color-hover);
+      }
     }
 
     &[data-selected="true"] {

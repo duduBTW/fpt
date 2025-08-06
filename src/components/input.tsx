@@ -15,9 +15,9 @@ function Icon(
 ) {
   return (
     <styles.icon>
-      <DsIcon size="base" {...props} />
+      <DsIcon aria-hidden size="base" {...props} />
     </styles.icon>
-  );  
+  );
 }
 
 Input.Content = Content;

@@ -8,7 +8,10 @@
             "$value": "{t2.surface-inverted}"
           },
           "background-hover": {
-            "$value": "{t2.content-inverted}"
+            "$value": "{t2.surface-inverted-hover}"
+          },
+          "background-active": {
+            "$value": "{t2.surface-inverted-active}"
           },
           "content": {
             "$value": "{t2.content-inverted}"
@@ -32,6 +35,9 @@
           }
         }
       }
+    },
+    "spacing": {
+      "gap": { "$value": "{spacing.2}" }
     },
     "size": {
       "small": {

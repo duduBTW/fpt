@@ -41,19 +41,19 @@ const sidebarItems: SidebarItem[] = [
   },
   {
     icon: "user-round",
-    location: "/users",
+    location: "/app/users",
   },
   {
     icon: "folder",
-    location: "/storage",
+    location: "/app/storage",
   },
   {
     icon: "lock",
-    location: "/security",
+    location: "/app/security",
   },
   {
     icon: "settings",
-    location: "/settings",
+    location: "/app/settings",
   },
 ];
 

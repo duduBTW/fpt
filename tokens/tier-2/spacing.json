@@ -1,6 +1,7 @@
 {
   "t2": {
     "$type": "dimension",
+    "container-width-sm": { "$value": "440px" },
     "container-width-md": { "$value": "720px" },
     "list-horizontal-compact": { "$value": "{spacing.2}" },
     "list-vertical-compact": { "$value": "{spacing.2}" },

@@ -17,12 +17,15 @@
     "@tanstack/react-router-devtools": "^1.130.0",
     "add": "^2.0.6",
     "date-fns": "^4.1.0",
+    "input-otp": "^1.4.2",
     "jotai": "^2.12.5",
     "lucide-react": "^0.525.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-hook-form": "^7.62.0",
     "sanitize.css": "^13.0.0",
-    "styled-components": "^6.1.19"
+    "styled-components": "^6.1.19",
+    "vite-tsconfig-paths": "^5.1.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",
