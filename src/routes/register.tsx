@@ -9,6 +9,8 @@ import { useRef, useState } from "react";
 import styled from "styled-components";
 import { Controller, useForm, type SubmitHandler } from "react-hook-form";
 import { registerUser, type RegisterDto } from "@service/register";
+import { useMutation } from "@tanstack/react-query";
+import { useSnackbar } from "@state/snackbar";
 
 export const Route = createFileRoute("/register")({
   component: RouteComponent,
@@ -23,6 +25,22 @@ function RouteComponent() {
     control,
     // formState: { errors },
   } = useForm<RegisterDto>();
+
+  const { openSnackbar } = useSnackbar();
+
+  const { mutate: registerUserMutate } = useMutation({
+    mutationFn: registerUser,
+    onError: () => {
+      openSnackbar({
+        label: "Failed to register.",
+        type: "error",
+      });
+    },
+    onSuccess: (userToken) => {
+      localStorage.setItem("userToken", userToken);
+      navigate({ to: "/app/storage/$" });
+    },
+  });
 
   const navigate = useNavigate();
   const pfpFileInputRef = useRef<HTMLInputElement>(null);
@@ -46,19 +64,11 @@ function RouteComponent() {
     setAvatarSrc(imageUrl);
   };
 
-  const onSubmit: SubmitHandler<RegisterDto> = async (formData) => {
-    const res = await registerUser({
+  const onSubmit: SubmitHandler<RegisterDto> = (formData) => {
+    registerUserMutate({
       ...formData,
       file: profilePictureFile.current,
     });
-
-    if (!res || res.status !== 200) {
-      return;
-    }
-
-    const userToken = await res.text();
-    localStorage.setItem("userToken", userToken);
-    navigate({ to: "/app/storage/$" });
   };
 
   return (

@@ -1,3 +1,4 @@
+import { Snackbar } from "@components/snackbar";
 import { createRootRoute, Outlet } from "@tanstack/react-router";
 
 export const Route = createRootRoute({
@@ -5,5 +6,10 @@ export const Route = createRootRoute({
 });
 
 function RootComponent() {
-  return <Outlet />;
+  return (
+    <>
+      <Outlet />
+      <Snackbar />
+    </>
+  );
 }

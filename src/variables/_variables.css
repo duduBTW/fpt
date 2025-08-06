@@ -205,6 +205,16 @@
   --sidebar-spacing-vertical: 16px;
   --sidebar-spacing-horizontal: 14px;
   --sidebar-spacing-gap: 14px;
+  --snackbar-color-background: #ffffff;
+  --snackbar-color-content: oklch(0.13 0.028 261.692);
+  --snackbar-color-border: #ffffff;
+  --snackbar-color-max-width: 180px;
+  --snackbar-spacing-horizontal: 14px;
+  --snackbar-spacing-vertical: 14px;
+  --snackbar-spacing-gap: 8px;
+  --snackbar-spacing-bottom: 14px;
+  --snackbar-spacing-icon: oklch(0.704 0.191 22.216);
+  --snackbar-radius: 8px;
   --table-color-background: oklch(0.971 0.013 17.38);
   --table-color-background-accent: #ffffff;
   --table-color-content: oklch(0.13 0.028 261.692);

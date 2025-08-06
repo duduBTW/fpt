@@ -14,8 +14,10 @@ export async function registerUser({ code, file, name }: RegisterDto) {
     formData.append("file", file);
   }
 
-  return publicFetch("register", {
+  const res = await publicFetch("register", {
     method: "POST",
     body: formData,
   });
+
+  return res.text();
 }

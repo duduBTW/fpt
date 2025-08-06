@@ -1,0 +1,21 @@
+{
+  "snackbar": {
+    "color": {
+      "background": { "$value": "{t2.surface-accent}" },
+      "content": { "$value": "{t2.content}" },
+      "border": { "$value": "{t2.surface-accent}" },
+      "max-width": { "$value": "180px" }
+    },
+    "spacing": {
+      "horizontal": { "$value": "{spacing.3}" },
+      "vertical": { "$value": "{spacing.3}" },
+      "gap": { "$value": "{spacing.2}" },
+      "bottom": { "$value": "{spacing.3}" },
+      "icon": { "$value": "{t2.secondary-icon}" }
+    },
+    "radius": {
+      "$type": "dimension",
+      "$value": "{radius.default}"
+    }
+  }
+}
